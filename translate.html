@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8">
+    <title></title>
+    <!-- <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"/>
+    <link rel="bookmark" href="images/favicon.ico" type="image/x-icon"/> -->
+    
+    <link rel="stylesheet" type="text/css" href="http://0.0.0.0:3001/code/css/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" type="text/css" href="http://0.0.0.0:3001/code/css/style.css" />
+    <script type="text/javascript" src="http://0.0.0.0:3001/code/js/jquery.min.js"></script>
+    <script type="text/javascript" src="http://0.0.0.0:3001/code/js/jquery.mCustomScrollbar.concat.min.js"></script>
+</head>
+<body>
+<header>
+  <nav class="header-content clearfix">
+    <div class="logo gather"></div>
+    <div class="user fr">
+      <img class="portrait" id="js_userpic" src="http://h.hiphotos.baidu.com/baike/c0%3Dbaike92%2C5%2C5%2C92%2C30/sign=beef9f48b419ebc4d4757ecbe34fa499/c75c10385343fbf275cf060eb77eca8065388f38.jpg"/>
+      <span class="user-name" id="js_nickname">用户头像</span>
+    </div>
+  </nav>
+</header>
+<section class="trans-main clearfix" id="js_content">
+  <div class="trans-left fl">
+    <div class="video-wrap" id="video_container">
+      <video></video>
+      <div class="video-trigger">
+         <button class="play-btn gather"></button>
+      </div>
+      <div class="video-mask"></div>
+    </div>
+    <div class="module">
+      <div class="m-title">视频信息</div>
+      <div class="m-content" id="J_courseDetail">
+        <div id="js_coursetitle"></div>
+        <h3 class="part" id="js_videotitle"></h3>
+        <div class="video-data">
+          <div class="progress clearfix">
+            <div class="gather circle fl"></div>
+            <div class="data fl" id="js_progress">0</div>
+          </div>
+          <div class="sentence">
+            <div class="gather circle fl"></div>
+            <div class="data fl" id="js_total">0句</div>
+          </div>
+          <div class="times">
+            <div class="gather circle fl"></div>
+            <div class="data fl" id="js_joinCount">0次</div>
+          </div>
+        </div>
+        <div class="video-source" id="js_courseinfo">
+          <div class="unit">
+           
+          </div>
+          <div class="teacher">
+          
+          </div>
+        </div>
+      </div>
+    </div>
+    <dl class="module instruction">
+      <dt>翻译说明</dt>
+      <dd>1.字幕自动跟随视频播放卷动</dd>
+      <dd>2.鼠标焦点移动出字幕编辑框后自动保存字幕</dd>
+      <dd>3.键盘[tab]键为快捷键，按下自动保存当前字幕并调到下一句中文字幕框进入编辑状态</dd>
+    </dl>
+  </div>
+  <div class="trans-right fl" id="js_tranList">
+    <ul class="list">
+      <!-- <li>
+        <div class="trans-en">
+          <div class="sign clearfix">
+            <div class="gather circle fl"></div>
+            <span class="dur-time fl">03:35</span>
+            <div class="gather auto fl"></div>
+          </div>
+          <a href="javascript:void(0);" class="en-txt">IT effects grown men,little boys and even happens to males still in utero.</a>
+          <textarea class="en-area" autofocus="autofocus"></textarea>
+        </div>
+        <div class="trans-ch">
+          <div class="sign clearfix">
+            <div class="gather circle fl"></div>
+            <div class="gather square fl"></div>
+          </div>
+          <div class="inputArea" contenteditable="true">在北半球，十二月有最短的白天在北半球，十二月有最短的白天在北半球，十二月有最短的白天在北半球，十二月有最短的白天</div>
+        </div>
+      </li> -->
+     <!--  <li>
+        <div class="trans-en">
+          <div class="sign clearfix">
+            <div class="gather circle fl"></div>
+            <span class="dur-time fl">03:35</span>
+          </div>
+          <a href="javascript:;" class="en-txt">IT effects grown men,little boys and even happens to males still in utero.</a>
+          <textarea class="en-area" autofocus="autofocus"></textarea>
+        </div>
+        <div class="trans-ch">
+          <div class="sign clearfix">
+            <div class="gather circle fl"></div>
+          </div>
+          <div class="inputArea" contenteditable="true"></div>
+        </div>
+      </li>
+      <li>
+        <div class="trans-en">
+          <div class="sign clearfix">
+            <div class="gather circle fl"></div>
+            <span class="dur-time fl">03:35</span>
+          </div>
+          <a href="javascript:;" class="en-txt">IT effects grown men,little boys and even happens to males still in utero.</a>
+          <textarea class="en-area" autofocus="autofocus"></textarea>
+        </div>
+        <div class="trans-ch">
+          <div class="sign clearfix">
+            <div class="gather circle fl"></div>
+          </div>
+          <div class="inputArea" contenteditable="true"></div>
+        </div>
+      </li>
+      <li>
+        <div class="trans-en">
+          <div class="sign clearfix">
+            <div class="gather circle fl"></div>
+            <span class="dur-time fl">03:35</span>
+          </div>
+          <a href="javascript:;" class="en-txt">IT effects grown men,little boys and even happens to males still in utero.</a>
+          <textarea class="en-area" autofocus="autofocus"></textarea>
+        </div>
+        <div class="trans-ch">
+          <div class="sign clearfix">
+            <div class="gather circle fl"></div>
+          </div>
+          <div class="inputArea" contenteditable="true"></div>
+        </div>
+      </li> -->
+    </ul>
+  </div>
+</section>
+<div class="layer-shade" id="js_mask"></div>
+<div class="layui-layer" id="js_note" type="dialog" times="9" showtime="0" contype="string">
+  <div class="layui-layer-title" style="cursor: move;" move="ok">提示</div>
+  <div class="layui-layer-content">数据加载中，请稍后...</div>
+  <div class="layui-layer-btn" style="display:none;">
+    <a class="layui-layer-btn0" target="_self">前往扫码</a>
+   </div>
+</div>
+<!--<script type="text/javascript">
+    var username="15210582639";
+    var token="d2c2e28f32cf6a07689edca727db0f7b1461478032857";
+    var courseId=1310;
+    var videoId = "ebcaa8be-8301-4920-8d3c-05fa2d1f16d3";
+</script>-->
+<script type="text/javascript" src="http://0.0.0.0:3001/code/js/data.js"></script>
+<script type="text/javascript" src="http://0.0.0.0:3001/code/js/localstorage.js"></script>
+<script type="text/javascript" src="http://192.168.1.103:3001/code/js/videoControl.js"></script>
+</body>
+</html>

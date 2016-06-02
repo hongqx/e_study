@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8">
+    <title>扫描二维码登陆</title>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"/>
+    <link rel="bookmark" href="images/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" type="text/css" href="http://m.yxgapp.com/d/mooc/webClient/css/yxgstyle.min.css" />
+    <script type="text/javascript">
+       var identifier = "f6bb4bef-d946-489e-aeec-23c4ed572f2b";//由后台生成该标识符
+    </script>
+</head>
+<body>
+<header>
+    <div class="header-content">
+        <div class="logo gather"></div>
+    </div>  
+</header>
+<div class="main">
+    <p>请用译学馆app扫描此二维码，进入web翻译页面</p>
+    <div class="codeWrap">
+      <img class="code" src="http://m.yxgapp.com/qrcode/f6bb4bef-d946-489e-aeec-23c4ed572f2b.png"/>
+    </div>
+    <p>二维码有效期为5分钟，超时请刷新页面</p>
+</div>
+<div class="layer-shade" id="js_mask" style="display: none;"></div>
+<div class="layui-layer" id="js_note" type="dialog" times="9" showtime="0" contype="string" style="display: none;">
+  <div class="layui-layer-title" style="cursor: move;" move="ok">提示</div>
+  <div class="layui-layer-content">二维码失效,请点击刷新页面...</div>
+  <div class="layui-layer-btn" >
+    <a class="layui-layer-btn0" target="_self">点击刷新</a>
+   </div>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="http://m.yxgapp.com/d/threeParty/jquery1_11_3.min.js"></script>
+<script type="text/javascript">
+    (function(){
+            var Cookie = {
+                 set : function(key,value,expires){
+                    var expStr ="";
+                   if(expires){
+                       var time = new Date().getTime();
+                       time += expires;
+                       expStr = ";expires="+new Date(time).toGMTString();
+                    }
+                    var _domain = ";domain=yxgapp.com";
+                    document.cookie = key + "=" + encodeURIComponent(value) + expStr+_domain;
+                },
+                get : function(key){
+                    if(document.cookie.length > 0){
+                        var _cstart = document.cookie.indexOf(key+"=");
+                        if(_cstart > -1){
+                            _cstart = _cstart + key.length + 1;
+                            var _cend = document.cookie.indexOf(";",_cstart);
+                            if(_cend === -1){
+                                _cend = document.cookie.length;
+                            }
+                            return  decodeURIComponent(document.cookie.substring(_cstart,_cend));
+                        }
+                    }
+                    return "";
+                }
+            };
+            /*处理登陆的验证*/
+            var LogIn = {
+                init : function(){
+                    this.startTime = new Date().getTime();
+                    this.timeNum = 5*60*1000;
+                    this.getLogIn();
+                },
+                getLogIn : function(){
+                    var _self = this;
+                    $.ajax({
+                        url:"http://m.yxgapp.com/d/mooc/webClient/GetLoginInfo.json",
+                        data:{
+                              identifier:window.identifier
+                        },
+                        type:"GET",
+                        dataType:"json",
+                        success:function(data){
+                            if(!data.result.result){
+                                var _time = new Date().getTime();
+                                if(data.result.errorCode == '001001'){
+                                    _self.showError();
+                                }else{
+                                    setTimeout(function(){
+                                       _self.getLogIn();
+                                    }, 2000);
+                                }
+                            }else{
+                                _self.setCookie(data);
+                                _self.toTranslate();
+                            }
+                        },
+                        error:function(){
+                            setTimeout(function(){
+                                _self.getLogIn();
+                            }, 2000);
+                        }
+                    });
+                },
+                showError : function(){
+                    var _mask = $("#js_mask");
+                    var _noteDom = $("#js_note");
+                    _noteDom.find(".layui-layer-btn0").attr("href", location.href);
+                    _mask.show();
+                    _noteDom.show();
+                },
+                setCookie:function(data){
+                     var _duration =  parseInt(data.duration) * 1000;
+                     //var date = new Date().getTime()+_duration;
+                     Cookie.set("userId" , data.userId , _duration);
+                     Cookie.set("token" , data.token , _duration);
+                     data.courseId ? Cookie.set("courseId",data.courseId) : "";
+                     data.videoId ? Cookie.set("videoId",data.videoId) : "";
+                     Cookie.set("avatarUrl",data.avatarUrl);
+                     Cookie.set("nickname",data.nickname);
+                },
+                toTranslate : function(){
+                    location.href ='http://m.yxgapp.com/d/mooc/webClient/translate.html';
+                }
+            };
+            window.onload =  function(){
+                LogIn.init();
+            };
+    })(jQuery);
+</script>
